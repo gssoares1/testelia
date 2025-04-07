@@ -1,0 +1,10 @@
+SELECT
+  d.name AS department_name,
+  COUNT(e.id) AS employee_count,
+  ROUND(AVG(COALESCE(e.salary, 0)), 2) AS avg_salary,
+  ROUND(MAX(COALESCE(e.salary, 0)), 2) AS max_salary,
+  ROUND(MIN(COALESCE(e.salary, 0)), 2) AS min_salary
+FROM departments d
+LEFT JOIN employees e ON d.id = e.department_id
+GROUP BY d.name
+ORDER BY avg_salary DESC;
